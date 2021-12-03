@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-    #skip_before_action :confirm_authentication, only: [:create]
-    #before_action :set_user, only: [:show, :update, :destroy]
+    skip_before_action :confirm_authentication, only: [:create]
+
     
     def show
       if current_user
          render json: current_user, status: :ok
       else
         not_current_user
-        # render json: {error: "No active session"}, status: :unauthorized
+        render json: {error: "No active session"}, status: :unauthorized
       end 
     end
 
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   
   private
         def user_params
-          params.permit(:first_name, :last_name, :username, :password, :password_confirmation, :email,  :phone_number, :address, :city, :state, :zipcode)        
+          params.permit(:admin, :first_name, :last_name, :username, :password, :password_confirmation, :email,  :phone_number, :address, :city, :state, :zipcode)        
         end
         
         def not_current_user

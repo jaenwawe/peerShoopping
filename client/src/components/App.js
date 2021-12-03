@@ -39,7 +39,7 @@ function App() {
   const [order, setOrder]= useState(null)
   const [total, setTotal] = useState(0)
   const [pay_method, setPayMethod] = useState('Visa')
-
+  
   const [orderItemsArr, setOrderItemsArr]= useState([])
   const history = useHistory();
   
@@ -116,35 +116,6 @@ function App() {
               })
                
             }
-     
-            function addOrderItems(product_id,customer_id,order_id)
-            {   
-                fetch('/order_items', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                      order_id,
-                      customer_id,
-                      product_id
-                  })
-                })
-                  .then(res => {
-                    if (res.ok) {
-                      res.json().then(order_item => {console.log(order_item)
-                        
-                      })
-                    } else {
-                      res.json().then(errors => 
-                      console.error(errors)
-                      )
-                     
-                    }
-                })
-               }
-
-      
 
                function loginRegisterInfo(user)
                {
@@ -269,16 +240,15 @@ function App() {
                          <CheckoutCart
                          cartArr={cartArr}
                          order={order}
-                        setOrderItemsArr={setOrderItemsArr}
+                        // setOrderItemsArr={setOrderItemsArr}
                         currentUser={currentUser} 
-                        orderItemsArr={orderItemsArr}
-                        addOrderItems={addOrderItems} 
+                        // orderItemsArr={orderItemsArr}
                         total={total}
                         setTotal={setTotal}
                         pay_method={pay_method}
                         setPayMethod={setPayMethod}
                         cartClick={cartClick}
-                        removeFromCart={removeFromCart}
+                        // removeFromCart={removeFromCart}
                          /> 
                       </Route>
 

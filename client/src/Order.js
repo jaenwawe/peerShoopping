@@ -27,16 +27,7 @@ function Order (order, product,orderItemsArr,setOrderItemsArr)
 // }
 
 return(
-    <>
-        {/* {(orderItemsArr.slice(-1)[0]===true) 
-        ? <div>{orderItemsArr.slice(-1)[0]}</div>
-         : <> </>
-        } */}
-
-        {(Math.random() < 0.5) 
-        ? <div>True</div>
-         : <> False </>
-        }
-    </>
+    <> Order</>
+      
 )}
   export default Order;

@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   
-  resources :products, except: [:index]
+  resources :products, except: [:index,:available,:update]
   resources :users, except: [:create, :show]
  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
-  get "/styles", to: "products#index"
+  get "/styles", to: "products#available"
+  patch "/products/:id", to: "products#update"
+  get "/products/", to: "products#index"
 
   post "/orders", to: "orders#create"
 
@@ -20,7 +22,12 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
    
   post "/sold", to: "order_items#create"
+  get "/everything_sold", to: "order_items#index"
+
+
+
   patch "/orders/:id", to: "orders#update"
+
 
 
 

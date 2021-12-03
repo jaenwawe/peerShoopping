@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-    #skip_before_action :confirm_authentication, only: [:create]
-    # before_action :set_order, only: [:show, :update, :destroy]
+    skip_before_action :confirm_authentication, only: [:create]
+
     
     def index    
       render json: Order.all, each_serializer: OrderSerializer  

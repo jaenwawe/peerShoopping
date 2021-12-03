@@ -1,9 +1,14 @@
 class ProductsController < ApplicationController
-        #skip_before_action :confirm_authentication, only: [:index, :create, :update, :destroy]
-        # before_action :set_product, only: [:show, :update, :destroy]
+        skip_before_action :confirm_authentication, only: [:available]
+        before_action :set_product, only: [:show, :update, :destroy]
         
         def index    
           render json: Product.all, each_serializer: ProductSerializer  
+        end
+
+
+        def available
+          render json: Product.where(products: { available: true })
         end
     
     
@@ -54,7 +59,7 @@ class ProductsController < ApplicationController
       
       private
             def product_params
-              params.permit(:user_id, :category, :size, :price, :photo, :review_stars, :review)        
+              params.permit(:available, :user_id, :category, :size, :price, :photo, :review_stars, :review)        
             end
             
             def not_current_product
@@ -73,4 +78,4 @@ class ProductsController < ApplicationController
           end
           
       
-    
+          private 
