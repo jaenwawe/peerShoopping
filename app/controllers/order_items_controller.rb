@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-    skip_before_action :confirm_authentication, only: [:create, :update, :destroy]
+  before_action :set_order_item, only: [:show, :update, :destroy]
    
     
     def index    
@@ -45,7 +45,7 @@ class OrderItemsController < ApplicationController
          render json: current_order_item, status: :ok
       else
         not_current_order_item
-        # render json: {error: "No active session"}, status: :unauthorized
+        render json: {error: "No active session"}, status: :unauthorized
       end 
     end
 

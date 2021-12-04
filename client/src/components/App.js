@@ -37,13 +37,13 @@ function App() {
   const [zipcode, setZip] = useState("");
   const [admin, setAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState('')
-  //const [priorOrdersArr, setPriorOrderArr] = useState([])
   const [order, setOrder]= useState(null)
   const [total, setTotal] = useState(0)
   const [pay_method, setPayMethod] = useState('Visa')
   
   const [orderItemsArr, setOrderItemsArr]= useState([])
   const history = useHistory();
+  
   
  
   useEffect(() => {
@@ -168,11 +168,13 @@ function App() {
         }
         
         function cartClick(product){
+          console.log(product)
           addToProducts(product)
           removeFromCart(product)          
         }
         
         function nonCartProductClick(product){
+          console.log(product)
           addToCart(product)
           removeProduct(product) 
          }

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "/allstyles", to: "products#index"
   get "/styles", to: "products#available"
   patch "/products/:id", to: "products#update"
-  #get "/products/", to: "products#index"
+  post "/products/", to: "products#create"
   patch "/products/:id", to: "products#delete"
   
  

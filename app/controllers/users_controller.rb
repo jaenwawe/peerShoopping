@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :confirm_authentication, only: [:create]
+  before_action :set_user, only: [ :index, :show, :update, :destroy]
 
     
     def show

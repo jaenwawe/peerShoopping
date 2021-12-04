@@ -3,37 +3,14 @@ import CartCard from "./CartCard"
 function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,pay_method="Visa",setPayMethod}) {
     const order_id = order.id
     const customer_id = currentUser.id
+    const available=false;
     let display
     setTotal(cartArr.reduce((a, {price}) => a + price, 0))
     
 
-
-    function orderTotalCustomer(total,pay_method) {
-    fetch(`/orders/${order_id}`, {
-        method: 'PATCH',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-        pay_method, 
-        total
-        })
-    })
-    .then(res => {
-    if (res.ok) {
-        res.json().then(order =>  console.log(order))
-    } else {
-        res.json().then(errors => 
-        console.error(errors)
-    )}
-})
-}
-
-
-
     function notAvailable(product_id)
     { 
-    const available=false;
+
             fetch(`/products/${product_id}`, {
                     method: 'PATCH',
                     headers: {
@@ -54,7 +31,7 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,p
     }   
 
 
-    function checkoutItem(product_id){    
+    function persistOrderItem(product_id){    
         fetch('/sold', {
           method: 'POST',
           headers: {
@@ -80,14 +57,40 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,p
       }
 
 
-      function persistOrder() {
-        console.log('persistOrderItems')
-           cartArr.map(product => {
-            let product_id = product.id   
-            checkoutItem(product_id)
+    function orderItemsUnavailable(){        
+        cartArr.map(product => {
+        let product_id = product.id   
+            persistOrderItem(product_id)
             notAvailable(product_id)
+    })}
+
+
+    function orderTotalCustomer(total,pay_method) {
+        fetch(`/orders/${order_id}`, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            pay_method, 
+            total
+            })
         })
+        .then(res => {
+        if (res.ok) {
+            res.json().then(order => console.log(order))
+        } else {
+            res.json().then(errors => 
+            console.error(errors)
+        )}
+    })
+    }
+
+    
+    function persistOrder() {
         orderTotalCustomer(total,pay_method) 
+        orderItemsUnavailable()
+
     }
 
         return (
