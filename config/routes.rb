@@ -21,7 +21,8 @@ Rails.application.routes.draw do
 
   delete "/logout", to: "sessions#destroy"
    
-  post "/sold", to: "order_items#create"
+  post "/sold/", to: "order_items#create"
+
   get "/everything_sold", to: "order_items#index"
 
 
