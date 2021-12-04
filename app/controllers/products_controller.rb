@@ -1,11 +1,16 @@
 class ProductsController < ApplicationController
-        before_action :set_product, only: [ :show, :update, :destroy]
-        before_action :authorize_user, only: [ :update, :destroy]
-        skip_before_action :confirm_authentication, only: [:index]
+        before_action :set_product, only: [ :index, :show, :update, :destroy]
+        before_action :authorize_user, only: [:index, :update, :destroy]
+        skip_before_action :confirm_authentication
         
         def index 
           render json: Product.all, each_serializer: ProductSerializer 
         end
+
+        def available 
+          render json:  Product.where(products: { available: true }), each_serializer: ProductSerializer 
+        end
+
 
         def show
              render json: @product

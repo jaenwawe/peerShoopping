@@ -260,6 +260,7 @@ function App() {
                          setCurrentUser={setCurrentUser}
                          setCartArr={setCartArr}
                          setIsLoggedIn={setIsLoggedIn}
+                         homeBar={homeBar}
                          /> 
                       </Route> 
                   </>

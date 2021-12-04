@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 
 function ProductCard({product,nonCartProductClick,currentUser}) 
 {   
-
+  
     function addChangeButton(e) 
     {nonCartProductClick(product)} 
         
@@ -24,7 +24,9 @@ function ProductCard({product,nonCartProductClick,currentUser})
                 <Card.Body>
                     <Card.Title>{product.category}</Card.Title>
                     <Card.Title>$ {product.price}</Card.Title>
-                    {currentUser.admin || currentUser.id== product.user_id ? deleteButton : <> </>}
+                    {currentUser.admin || currentUser.id === product.user_id 
+                    ? deleteButton 
+                    : <> </>}
                     <Button onClick={e => addChangeButton(e)} 
                             variant="primary">Add to Cart
                     </Button>

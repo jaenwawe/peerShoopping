@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
-  get "/styles", to: "products#index"
+  get "/allstyles", to: "products#index"
+  get "/styles", to: "products#available"
   patch "/products/:id", to: "products#update"
   #get "/products/", to: "products#index"
   patch "/products/:id", to: "products#delete"

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_event, only: [:show, :update, :destroy]
+  before_action :set_product, only: [:show, :update, :destroy]
   before_action :authorize_user, only: [:update, :destroy]
   skip_before_action :confirm_authentication, only: [:create]
 

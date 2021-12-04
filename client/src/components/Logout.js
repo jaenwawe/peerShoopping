@@ -1,35 +1,24 @@
   import { useHistory } from 'react-router-dom'
 
-function Logout({setIsLoggedIn, setCurrentUser, setCartArr, currentUser}) {
+function Logout({setIsLoggedIn, setCurrentUser, setCartArr, currentUser, homeBar}) {
     const history = useHistory()
     setIsLoggedIn(false)
     setCartArr([])
+    setCurrentUser('')
    
-    function handleLogOut(event) {
-
-        // fetch(`/logout/${currentUser.id}`,{
-        fetch(`/logout`,{
-        method: "DELETE"
-    })
-    .then(resp => {
-        if (resp.ok) {
+    function handleLogOut() {
+        setIsLoggedIn(false)
+        setCartArr([])
+        setCurrentUser(null)
+        homeBar()
        
-            setCurrentUser(null)
-            history.push("/")
-        }else {
-            resp.json().then(errors => {
-            console.error(errors)
-            })
-        }
-  })
-}
+    }
 
- 
-
-    return( <div>
-    <h1>Logged out</h1>
-  
-    </div>
+    return( 
+        <div>
+            {handleLogOut}
+            <h1>Logged out</h1>
+        </div>
 
     )
 }
