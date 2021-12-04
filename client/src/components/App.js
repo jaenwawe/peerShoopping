@@ -1,5 +1,7 @@
+//import { BrowserRouter, Route, Switch,useHistory } from "react-router-dom";
+import { Route, Switch,useHistory } from "react-router-dom";
+
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Route, Switch,useHistory } from "react-router-dom";
 import '../style/App.css'
 import "../style/index.css"
 
@@ -13,7 +15,7 @@ import Register from './Register';
 
 import Logout from './Logout';
 import Sale from './Sale';
-import Order from '../Order';
+//import Order from '../Order';
 
 import ProductContainer from "./ProductContainer";
 import CartContainer from './CartContainer';
@@ -34,7 +36,7 @@ function App() {
   const [city, setCity] = useState("");
   const [zipcode, setZip] = useState("");
   const [admin, setAdmin] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState('')
   //const [priorOrdersArr, setPriorOrderArr] = useState([])
   const [order, setOrder]= useState(null)
   const [total, setTotal] = useState(0)
@@ -179,6 +181,7 @@ function App() {
         <ProductContainer 
           productArr={productArr}
           nonCartProductClick={nonCartProductClick}
+          currentUser={currentUser}
           />
   
          let unregisteredRoutes =

@@ -1,23 +1,14 @@
 class ProductsController < ApplicationController
-        skip_before_action :confirm_authentication, only: [:available]
-        before_action :set_product, only: [:show, :update, :destroy]
+        before_action :set_product, only: [ :show, :update, :destroy]
+        before_action :authorize_user, only: [ :update, :destroy]
+        skip_before_action :confirm_authentication, only: [:index]
         
-        def index    
-          render json: Product.all, each_serializer: ProductSerializer  
+        def index 
+          render json: Product.all, each_serializer: ProductSerializer 
         end
 
-
-        def available
-          render json: Product.where(products: { available: true })
-        end
-    
-    
         def show
-          if current_product
-             render json: current_product, status: :ok
-          else
-            not_current_product
-          end 
+             render json: @product
         end
     
   
@@ -31,33 +22,16 @@ class ProductsController < ApplicationController
         end
           
           def update
-          set_product
-            if @product
-            @product.update(product_params)
-              if @product.valid?
-                @product.save
-                render json: @product
-              else 
-                  not_found 
-              end
-            else        
-            render json: {error: "Could not find index #{[:id]}"},  status: :unprocessable_entity 
-            end      
+            if @product.update(product_params)
+                render json: @product, status: :ok 
           end
       
         def destroy
-          set_product
-          if @product
             @product.destroy
-            render json: {message: "deleted"}, status: :ok
-          else
-            render json: {error: "Could not find index #{[:id]}"}
-          end
         end
-          
-            
       
       private
+      
             def product_params
               params.permit(:available, :user_id, :category, :size, :price, :photo, :review_stars, :review)        
             end
@@ -74,8 +48,13 @@ class ProductsController < ApplicationController
             def set_product
               @product = Product.find(params[:id])
             end
-          
-          end
-          
+
       
-          private 
+            def authorize_user
+              user_can_modify = current_user.admin? || object.user == current_user
+              if !user_can_modify
+                render json: { error: "You don't have permission to perform that action" }, status: :forbidden
+              end
+            end
+          end end
+        
