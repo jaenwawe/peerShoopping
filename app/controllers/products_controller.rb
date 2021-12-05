@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 end
 
 def available 
-  render json:  Product.where(products: { available: true }), each_serializer: ProductSerializer 
+  render json:  Product.where("available": true), each_serializer: ProductSerializer
 end
 
   
@@ -58,7 +58,7 @@ end
 
 private
     def product_params
-      params.permit(:available, :user_id, :category, :size, :price, :photo, :review_stars, :review)        
+      params.permit(:available, :user_id, :category, :size, :price, :photo)        
     end
     
     def not_current_product
