@@ -7,9 +7,6 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.string :size
       t.integer :price
       t.string :photo
-      t.integer :review_stars
-      t.text :review
-
       t.timestamps
     end
   end

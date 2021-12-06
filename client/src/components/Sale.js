@@ -5,12 +5,13 @@ import { useState,useEffect } from 'react'
 //I need to add to a product array
 // function Sale({ productArr,setProductArr, user_id, order_id}) {
 
-function Sale({currentUser, setProductArr, productArr,setIsLoggedIn }) {
+function Sale({setAvailable, available, currentUser, setProductArr, productArr,setIsLoggedIn }) {
 
   const [category, setCategory] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
   const [photo, setPhoto] = useState("");
+  
 
   const history = useHistory()
   let user_id = currentUser.id
@@ -28,7 +29,8 @@ function Sale({currentUser, setProductArr, productArr,setIsLoggedIn }) {
         category, 
         size, 
         price, 
-        photo
+        photo,
+        available
        })
       })
         .then(res => {

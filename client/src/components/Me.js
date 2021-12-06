@@ -14,7 +14,7 @@ function Me ({currentUser}) {
   <h5>{currentUser.phone_number}</h5>
   <h5>{ currentUser.address} </h5>
   <h5>{ currentUser.city}</h5> 
-  <h5>{currentUser.state}</h5>
+  <h5>{currentUser.state}</h5>  
   <h5>{ currentUser.zipcode} </h5>
 
   </div>    

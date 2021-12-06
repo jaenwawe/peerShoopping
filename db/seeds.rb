@@ -50,8 +50,7 @@ puts "Seeding users"
         city:  Faker::Address.city,
         state:  Faker::Address.state_abbr,
         zipcode:  Faker::Address.zip_code,
-        admin: random_boolean, 
-        available: random_boolean
+        admin: false
     )
     users<<u
 end
@@ -66,8 +65,7 @@ end
         size: rand(0..15),
         price: rand(10..50),
         photo:  type[same].values.join,
-        review_stars: rand(1..5),
-        review: Faker::Restaurant.review  
+        available: random_boolean
     )
     products<<p
 end

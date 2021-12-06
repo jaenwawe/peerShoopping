@@ -1,5 +1,7 @@
+//import { BrowserRouter, Route, Switch,useHistory } from "react-router-dom";
+import { Route, Switch,useHistory } from "react-router-dom";
+
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Route, Switch,useHistory } from "react-router-dom";
 import '../style/App.css'
 import "../style/index.css"
 
@@ -13,7 +15,7 @@ import Register from './Register';
 
 import Logout from './Logout';
 import Sale from './Sale';
-import Order from '../Order';
+//import Order from '../Order';
 
 import ProductContainer from "./ProductContainer";
 import CartContainer from './CartContainer';
@@ -34,16 +36,16 @@ function App() {
   const [city, setCity] = useState("");
   const [zipcode, setZip] = useState("");
   const [admin, setAdmin] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null)
-  //const [priorOrdersArr, setPriorOrderArr] = useState([])
+  const [currentUser, setCurrentUser] = useState('')
   const [order, setOrder]= useState(null)
   const [total, setTotal] = useState(0)
   const [pay_method, setPayMethod] = useState('Visa')
-
+  
   const [orderItemsArr, setOrderItemsArr]= useState([])
   const history = useHistory();
   
- 
+
+  
   useEffect(() => {
     fetch("/styles")
       .then((response) => response.json())
@@ -116,35 +118,6 @@ function App() {
               })
                
             }
-     
-            function addOrderItems(product_id,customer_id,order_id)
-            {   
-                fetch('/order_items', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                      order_id,
-                      customer_id,
-                      product_id
-                  })
-                })
-                  .then(res => {
-                    if (res.ok) {
-                      res.json().then(order_item => {console.log(order_item)
-                        
-                      })
-                    } else {
-                      res.json().then(errors => 
-                      console.error(errors)
-                      )
-                     
-                    }
-                })
-               }
-
-      
 
                function loginRegisterInfo(user)
                {
@@ -177,6 +150,27 @@ function App() {
                    })
                    homeBar()
                   }
+                  function  unAvailableProduct(product)  {
+                    let  available=false;
+                    const notAvailableProduct =(e)=>{
+                        fetch(`/products/${product.id}`, {
+                            method: 'PATCH',
+                            headers: {
+                            'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ available })
+                        })
+                        .then(res => {
+                        if (res.ok) {
+                            res.json()            
+                        } else {
+                            res.json().then(errors => 
+                            console.error(errors)
+                            )}
+                    })
+                  }
+                  removeProduct(product)  
+                }
 
          function removeProduct(product) {      
           setProductArr(productArr.filter(item => item !== product))
@@ -195,11 +189,13 @@ function App() {
         }
         
         function cartClick(product){
+          console.log(product)
           addToProducts(product)
           removeFromCart(product)          
         }
         
         function nonCartProductClick(product){
+          console.log(product)
           addToCart(product)
           removeProduct(product) 
          }
@@ -208,6 +204,9 @@ function App() {
         <ProductContainer 
           productArr={productArr}
           nonCartProductClick={nonCartProductClick}
+          currentUser={currentUser}
+          removeProduct={removeProduct}
+          unAvailableProduct={unAvailableProduct}
           />
   
          let unregisteredRoutes =
@@ -269,16 +268,15 @@ function App() {
                          <CheckoutCart
                          cartArr={cartArr}
                          order={order}
-                        setOrderItemsArr={setOrderItemsArr}
+                        // setOrderItemsArr={setOrderItemsArr}
                         currentUser={currentUser} 
-                        orderItemsArr={orderItemsArr}
-                        addOrderItems={addOrderItems} 
+                        // orderItemsArr={orderItemsArr}
                         total={total}
                         setTotal={setTotal}
                         pay_method={pay_method}
                         setPayMethod={setPayMethod}
                         cartClick={cartClick}
-                        removeFromCart={removeFromCart}
+                        // removeFromCart={removeFromCart}
                          /> 
                       </Route>
 
@@ -287,6 +285,7 @@ function App() {
                          setCurrentUser={setCurrentUser}
                          setCartArr={setCartArr}
                          setIsLoggedIn={setIsLoggedIn}
+                         homeBar={homeBar}
                          /> 
                       </Route> 
                   </>

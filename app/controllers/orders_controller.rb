@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
-    #skip_before_action :confirm_authentication, only: [:create]
-    # before_action :set_order, only: [:show, :update, :destroy]
-    
+
     def index    
       render json: Order.all, each_serializer: OrderSerializer  
     end
@@ -15,22 +13,26 @@ class OrdersController < ApplicationController
           end
         end
           
-          def update
-          set_order
-            if @order
-            @order.update(order_params)
-              if @order.valid?
-                @order.save
-                render json: @order
-              else 
-                  not_found 
-              end
-            else        
-            render json: {error: "Could not find index #{[:id]}"},  status: :unprocessable_entity 
-            end      
-          end
+          
+        
+      def update
+        set_order
+          if @order
+          @order.update(order_params)
+            if @order.valid?
+              @order.save
+              render json: @order
+            else 
+                not_found 
+            end
+          else        
+          render json: {error: "Could not find index #{[:id]}"},  status: :unprocessable_entity 
+          end      
+        end
       
-        def destroy
+        
+          
+          def destroy
           set_order
           if @order
             @order.destroy
