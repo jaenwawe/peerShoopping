@@ -15,10 +15,6 @@ gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem "active_model_serializers", "~> 0.10.12"
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -39,7 +35,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
 
 
 

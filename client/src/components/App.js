@@ -44,8 +44,8 @@ function App() {
   const [orderItemsArr, setOrderItemsArr]= useState([])
   const history = useHistory();
   
+
   
- 
   useEffect(() => {
     fetch("/styles")
       .then((response) => response.json())
@@ -150,6 +150,27 @@ function App() {
                    })
                    homeBar()
                   }
+                  function  unAvailableProduct(product)  {
+                    let  available=false;
+                    const notAvailableProduct =(e)=>{
+                        fetch(`/products/${product.id}`, {
+                            method: 'PATCH',
+                            headers: {
+                            'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ available })
+                        })
+                        .then(res => {
+                        if (res.ok) {
+                            res.json()            
+                        } else {
+                            res.json().then(errors => 
+                            console.error(errors)
+                            )}
+                    })
+                  }
+                  removeProduct(product)  
+                }
 
          function removeProduct(product) {      
           setProductArr(productArr.filter(item => item !== product))
@@ -184,6 +205,8 @@ function App() {
           productArr={productArr}
           nonCartProductClick={nonCartProductClick}
           currentUser={currentUser}
+          removeProduct={removeProduct}
+          unAvailableProduct={unAvailableProduct}
           />
   
          let unregisteredRoutes =

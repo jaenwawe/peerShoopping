@@ -1,12 +1,13 @@
 import ProductCard from './ProductCard';
 
-function ProductContainer({productArr, nonCartProductClick,currentUser}) {
+function ProductContainer({unAvailableProduct,productArr, nonCartProductClick,currentUser,removeProduct}) {
 
     let item = productArr.map(product => 
         <ProductCard
             nonCartProductClick={nonCartProductClick}
             product={product}
             currentUser={currentUser}
+            unAvailableProduct={unAvailableProduct}
         />)
     
     return (

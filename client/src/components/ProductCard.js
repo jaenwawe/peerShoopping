@@ -1,18 +1,19 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-function ProductCard({product,nonCartProductClick,currentUser}) 
+function ProductCard({product,nonCartProductClick,currentUser,unAvailableProduct}) 
 {   
-  
+
     function addChangeButton(e) 
     {nonCartProductClick(product)} 
         
+   
+    function removeMethod(e) 
+    {unAvailableProduct(product)}
+
+   
     
-        const deleteProduct =(e)=>{
-            fetch(`/products/${product.id}`, {
-                method: 'DELETE'})}
-    
-        const deleteButton =   <> <Button onClick={e =>  deleteProduct(e)} 
+        const deleteButton =   <> <Button onClick={removeMethod} 
         variant="primary">Remove Item </Button><br/> <br/></>
 
 
@@ -26,10 +27,11 @@ function ProductCard({product,nonCartProductClick,currentUser})
                     <Card.Title>$ {product.price}</Card.Title>
                     {currentUser.admin || currentUser.id === product.user_id 
                     ? deleteButton 
-                    : <> </>}
-                    <Button onClick={e => addChangeButton(e)} 
-                            variant="primary">Add to Cart
-                    </Button>
+                    : <Button onClick={e => addChangeButton(e)} 
+                    variant="primary">Add to Cart
+                    </Button>}
+                    {removeMethod}
+                    
                 
                 </Card.Body>
                 </Card>
