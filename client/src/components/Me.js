@@ -1,8 +1,13 @@
 import React from "react"
 import {made_image} from "../data/Mock"
+import {useEffect} from 'react'
 
 
 function Me ({currentUser}) {
+
+
+
+
 
 
     return (

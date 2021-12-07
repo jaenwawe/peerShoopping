@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-function Login({handleLogin, setEmail, email, setPassword, password}) {
+function Login({handleLogin, setEmail, email, setPassword, password,currentUser }) {
 // function Login({cartArray, currentUser, setCurrentUser, handleLogin, setEmail, email, setPassword, password}) {
   const history = useHistory()
   const homePage = () => {
@@ -33,6 +33,7 @@ function Login({handleLogin, setEmail, email, setPassword, password}) {
     
         <button type="submit" className="btn btn-primary">Submit</button>
     </form>
+
   {homePage}
 </div>
   )

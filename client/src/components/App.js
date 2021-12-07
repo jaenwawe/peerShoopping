@@ -22,8 +22,7 @@ import CartContainer from './CartContainer';
 import CheckoutCart from './CheckoutCart';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [productArr, setProductArr]= useState([])
+const [productArr, setProductArr]= useState([])
   
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -36,7 +35,7 @@ function App() {
   const [city, setCity] = useState("");
   const [zipcode, setZip] = useState("");
   const [admin, setAdmin] = useState(false);
-  const [currentUser, setCurrentUser] = useState('')
+
   const [order, setOrder]= useState(null)
   const [total, setTotal] = useState(0)
   const [pay_method, setPayMethod] = useState('Visa')
@@ -45,12 +44,21 @@ function App() {
   const history = useHistory();
 
   const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartArr') ||'[]') 
+  
   const [cartArr, setCartArr] = useState(cartFromLocalStorage)
-
   useEffect(() => {
     localStorage.setItem('cartArr',JSON.stringify(cartArr));
       },[cartArr])
   
+      const currentUserStateLocalStorage = JSON.parse(localStorage.getItem('currentUser'))
+      const [currentUser, setCurrentUser] = useState(currentUserStateLocalStorage)
+  
+    useEffect(() => {
+      localStorage.setItem('currentUser', JSON.stringify(currentUser))
+    }, [currentUser])
+
+    const [isLoggedIn, setIsLoggedIn] = useState(!! currentUser)
+
 
       useEffect(() => {
         fetch("/styles")
