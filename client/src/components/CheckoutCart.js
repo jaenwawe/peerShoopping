@@ -1,12 +1,14 @@
 import CartCard from "./CartCard"
 
-function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,pay_method="Visa",setPayMethod, emptyCart,homeBar}) {
+function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal ,pay_method,setPayMethod, emptyCart,homeBar}) {
     let order_id
     if (order!= null) order_id = order.id
     const customer_id = currentUser.id
     const available=false;
     let display
-    setTotal(cartArr.reduce((a, {price}) => a + price, 0))
+    let  sum
+    sum =cartArr.reduce((a, {price}) => a + price, 0)
+    setTotal(sum)
     
 
     function notAvailable(product_id)
@@ -109,7 +111,8 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,p
                             <input 
                             type="payMethod" 
                             name="payMethod" 
-                            value={pay_method}
+                            placeholder="Coins"
+                           
                              onChange={(e) => setPayMethod(e.target.value)}
                             ></input>
                         </label>
