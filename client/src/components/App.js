@@ -193,6 +193,9 @@ const [productArr, setProductArr]= useState([])
         function removeFromCart(product){
           setCartArr (cartArr.filter(item => item !== product))
         }     
+        function emptyCart(product){
+          setCartArr ([])
+        }     
   
 
         function addToCart(product){
@@ -290,7 +293,8 @@ const [productArr, setProductArr]= useState([])
                         pay_method={pay_method}
                         setPayMethod={setPayMethod}
                         cartClick={cartClick}
-                        // removeFromCart={removeFromCart}
+                        emptyCart={emptyCart}
+                        homeBar={homeBar}
                          /> 
                       </Route>
 

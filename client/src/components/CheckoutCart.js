@@ -1,8 +1,8 @@
 import CartCard from "./CartCard"
 
-function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,pay_method="Visa",setPayMethod}) {
-    
-    const order_id = order.id
+function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,pay_method="Visa",setPayMethod, emptyCart,homeBar}) {
+    let order_id
+    if (order!= null) order_id = order.id
     const customer_id = currentUser.id
     const available=false;
     let display
@@ -91,6 +91,8 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total=0,setTotal,p
     function persistOrder() {
         orderTotalCustomer(total,pay_method) 
         orderItemsUnavailable()
+        emptyCart()
+        homeBar()
 
     }
 
