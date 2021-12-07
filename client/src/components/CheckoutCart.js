@@ -1,7 +1,7 @@
 import CartCard from "./CartCard"
 
 //function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar,orderTotalCustomer}) {
-function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar}) {
+function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar,handleLogOut}) {
   
     const customer_id = currentUser.id
     const available=false;
@@ -98,8 +98,8 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pa
         orderItemsUnavailable()
         orderTotalCustomer(total,pay_method,order)
         emptyCart()
+        handleLogOut()
         homeBar()
-
     }
 
         return (

@@ -1,12 +1,8 @@
-import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 
-function Login({handleLogin, setEmail, email, setPassword, password,loginRegisterInfo ,currentUser }) {
+
+function Login({handleLogin, setEmail, email, setPassword, password,loginRegisterInfo ,currentUser,homeBar }) {
 // function Login({cartArray, currentUser, setCurrentUser, handleLogin, setEmail, email, setPassword, password}) {
-  const history = useHistory()
-  const homePage = () => {
-    history.push("/");
-  };
+
   return (
     <div className="form">   
     <h5> Already a member? Enter your email address and password to login</h5>
@@ -33,8 +29,6 @@ function Login({handleLogin, setEmail, email, setPassword, password,loginRegiste
     
         <button type="submit" className="btn btn-primary">Submit</button>
     </form>
-
-    loginRegisterInfo(currentUser) 
 </div>
   )
 }

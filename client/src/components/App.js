@@ -86,12 +86,42 @@ const [productArr, setProductArr]= useState([])
               res.json()
               .then(user => loginRegisterInfo(user))
               .then =(setIsLoggedIn(true))
+               homeBar()
               } else {
               res.json().then(errors => {
                 console.error(errors)
               })
             }
           })
+      }
+
+
+      
+      function handleLogOut() {
+          setIsLoggedIn(false)
+          setCartArr([])
+          //setProductArr([])
+          setEmail('')
+          setPassword('')
+          setFirstName('')
+          setLastName("")
+          setUsername("")
+          setNumber("")
+          setAddress("")
+          setState("")
+          setCity("")
+          setZip("")
+          setAdmin(false)
+          setOrder(null)
+          setTotal(0)
+          setPayMethod('Visa')
+          setOrderItemsArr([])
+          setCurrentUser(null)
+          localStorage.clear();
+          homeBar()
+
+   
+
       }
 
         const handleRegister = (event) => 
@@ -354,6 +384,7 @@ const [productArr, setProductArr]= useState([])
                         cartClick={cartClick}
                         emptyCart={emptyCart}
                         homeBar={homeBar}
+                        handleLogOut={handleLogOut}
                       // orderTotalCustomer={orderTotalCustomer}
                          /> 
                       </Route>
@@ -364,6 +395,7 @@ const [productArr, setProductArr]= useState([])
                          setCartArr={setCartArr}
                          setIsLoggedIn={setIsLoggedIn}
                          homeBar={homeBar}
+                         handleLogOut={handleLogOut}
                          /> 
                       </Route> 
                   </>
