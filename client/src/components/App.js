@@ -231,7 +231,8 @@ const [productArr, setProductArr]= useState([])
               handleLogin={handleLogin} 
               setIsLoggedIn={setIsLoggedIn}
               setEmail={setEmail}
-              setPassword={setPassword} /> 
+              setPassword={setPassword} 
+              setOrder={setOrder}/> 
               
         </Route> 
 
