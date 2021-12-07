@@ -1,8 +1,21 @@
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+
+
 
 function ProductCard({product,nonCartProductClick,currentUser,unAvailableProduct}) 
 {   
+    const product_id =product.id
+    const rights =(currentUser, product)=>{
+        if (currentUser===null) return addButton
+        else if (currentUser.id != product.user_id) 
+            return addButton
+        else  
+            return deleteButton
+    }
+
+    // if (currentUser===null) admin=false
+    // else (currentUser.id=== product.user_id) 
+    //     admin=true  
 
     function addChangeButton(e) 
     {nonCartProductClick(product)} 
@@ -13,8 +26,12 @@ function ProductCard({product,nonCartProductClick,currentUser,unAvailableProduct
 
    
     
-        const deleteButton =   <> <Button onClick={removeMethod} 
-        variant="primary">Remove Item </Button><br/> <br/></>
+        const deleteButton = <button onClick={removeMethod} 
+        variant="primary">Remove Item </button>
+       
+        const addButton =<button onClick={e => addChangeButton(e)} 
+        variant="primary">Add to Cart
+        </button>
 
 
     return (
@@ -25,11 +42,9 @@ function ProductCard({product,nonCartProductClick,currentUser,unAvailableProduct
                 <Card.Body>
                     <Card.Title>{product.category}</Card.Title>
                     <Card.Title>$ {product.price}</Card.Title>
-                    {currentUser.admin || currentUser.id === product.user_id 
-                    ? deleteButton 
-                    : <Button onClick={e => addChangeButton(e)} 
-                    variant="primary">Add to Cart
-                    </Button>}
+
+                    
+                    {rights(currentUser, product)}
                     {removeMethod}
                     
                 
