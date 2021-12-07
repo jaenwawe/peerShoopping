@@ -1,14 +1,13 @@
 import CartCard from "./CartCard"
 
-function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal ,pay_method,setPayMethod, emptyCart,homeBar}) {
-    let order_id
-    if (order!= null) order_id = order.id
+//function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar,orderTotalCustomer}) {
+function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar}) {
+  
     const customer_id = currentUser.id
     const available=false;
     let display
-    let  sum
-    sum =cartArr.reduce((a, {price}) => a + price, 0)
-    setTotal(sum)
+    
+    setTotal(cartArr.reduce((a, {price}) => a + price, 0))
     
 
     function notAvailable(product_id)
@@ -34,8 +33,10 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal ,p
     }   
 
 
-    function persistOrderItem(product_id){    
-        fetch('/sold', {
+    function persistOrderItem(order,product){   
+       let product_id = product.id
+       let order_id = order.id
+        fetch(`/orders/${order.id}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -63,13 +64,15 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal ,p
     function orderItemsUnavailable(){        
         cartArr.map(product => {
         let product_id = product.id   
-            persistOrderItem(product_id)
+            persistOrderItem(product, order)
             notAvailable(product_id)
+         
     })}
 
 
-    function orderTotalCustomer(total,pay_method) {
-        fetch(`/orders/${order_id}`, {
+    function orderTotalCustomer(total,pay_method,order) {
+        
+        fetch(`/orders/${order}`, {
             method: 'PATCH',
             headers: {
             'Content-Type': 'application/json'
@@ -79,20 +82,21 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal ,p
             total
             })
         })
-        .then(res => {
-        if (res.ok) {
-            res.json().then(order => console.log(order))
-        } else {
-            res.json().then(errors => 
-            console.error(errors)
-        )}
+           .then(res => {
+            if (res.ok) {
+                res.json().then(order => console.log(order))
+            } else {
+                res.json().then(errors => 
+                console.error(errors)
+            )}
     })
     }
 
     
     function persistOrder() {
-        orderTotalCustomer(total,pay_method) 
+        //orderTotalCustomer(total,pay_method,order) 
         orderItemsUnavailable()
+        orderTotalCustomer(total,pay_method,order)
         emptyCart()
         homeBar()
 
@@ -112,7 +116,6 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal ,p
                             type="payMethod" 
                             name="payMethod" 
                             placeholder="Coins"
-                           
                              onChange={(e) => setPayMethod(e.target.value)}
                             ></input>
                         </label>

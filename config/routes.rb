@@ -15,10 +15,9 @@ Rails.application.routes.draw do
   post "/register", to: "users#create"
   patch "/orders/:id", to: "orders#update"
   get "/orders", to: "orders#index"
-  post "/orders", to: "orders#create"
+  post "/shopping", to: "orders#create"
   delete "/orders", to: "orders#destroy"
 
-  get "/orders", to: "orders#index"
 
   post "/products/add", to: "products#create" 
 

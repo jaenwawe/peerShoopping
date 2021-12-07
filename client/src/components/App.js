@@ -135,35 +135,42 @@ const [productArr, setProductArr]= useState([])
 
                function loginRegisterInfo(user)
                {
+                 let total=0;
+                 let pay_method="Wallet"
+
                    setCurrentUser(user) 
                    console.log(user)
                    setIsLoggedIn(true)          
                    let user_id = user.id
-                
-                   fetch('/orders', {
-                     method: 'POST',
-                     headers: {
-                       'Content-Type': 'application/json'
-                     },
-                     body: JSON.stringify({
-                     user_id
-                     })
-                   })
-                     .then(res => {
-                       if (res.ok) {
-                         res.json().then(order => {
-                           setOrder(order)
-                           console.log(order)
-                           
-                         })
-                       } else {
-                         res.json().then(errors => 
-                         console.error(errors)
-                         )
-                       }
-                   })
-                   homeBar()
-                  }
+                   
+                   fetch('/shopping', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      total,
+                      pay_method,
+                      user_id 
+                    })
+                  })
+                    .then(res => {
+                      if (res.ok) {
+                        res.json().then(order => {
+                          console.log(order)
+                          setOrder(order.id)
+                        })
+                      } else {
+                        res.json().then(errors => 
+                        console.error(errors)
+                        )
+                      }
+                  })
+                }
+
+                  
+        
+
                   function  unAvailableProduct(product)  {
                     let  available=false;
                     const notAvailableProduct =(e)=>{
@@ -185,6 +192,57 @@ const [productArr, setProductArr]= useState([])
                   }
                   removeProduct(product)  
                 }
+
+
+
+      //   function orderTotalCustomer(order) {
+          
+      //     fetch(`/orders/${order.id}`, {
+      //         method: 'PATCH',
+      //         headers: {
+      //         'Content-Type': 'application/json'
+      //         },
+      //         body: JSON.stringify({
+      //         pay_method, 
+      //         total
+      //         })
+      //     })
+      //     .then(res => {
+      //     if (res.ok) {
+      //         res.json().then(order => console.log(order))
+      //     } else {
+      //         res.json().then(errors => 
+      //         console.error(errors)
+      //     )}
+      // })}
+
+    function persistOrderItem(order, product){
+          let order_id=order.id
+          let customer_id=currentUser.id
+          let product_id=product
+      fetch('/sold', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            order_id,
+            customer_id,
+            product_id
+        })
+      })
+        .then(res => {
+       
+          if (res.ok) {
+            res.json ()
+            .then(order_item => {console.log(order_item)
+            })
+          } else {
+            res.json().then(errors => 
+            console.error(errors)
+            )}
+      })
+    }
 
          function removeProduct(product) {      
           setProductArr(productArr.filter(item => item !== product))
@@ -234,7 +292,8 @@ const [productArr, setProductArr]= useState([])
               handleLogin={handleLogin} 
               setIsLoggedIn={setIsLoggedIn}
               setEmail={setEmail}
-              setPassword={setPassword} /> 
+              setPassword={setPassword} 
+              loginRegisterInfo={loginRegisterInfo}/> 
               
         </Route> 
 
@@ -295,6 +354,7 @@ const [productArr, setProductArr]= useState([])
                         cartClick={cartClick}
                         emptyCart={emptyCart}
                         homeBar={homeBar}
+                      // orderTotalCustomer={orderTotalCustomer}
                          /> 
                       </Route>
 
