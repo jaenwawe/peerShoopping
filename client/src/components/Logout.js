@@ -5,12 +5,15 @@ function Logout({setIsLoggedIn, setCurrentUser, setCartArr, currentUser, homeBar
     setIsLoggedIn(false)
     setCartArr([])
     setCurrentUser('')
+    localStorage.clear();
    
     function handleLogOut() {
         setIsLoggedIn(false)
         setCartArr([])
         setCurrentUser(null)
+        localStorage.clear();
         homeBar()
+        
        
     }
 

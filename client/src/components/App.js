@@ -24,7 +24,7 @@ import CheckoutCart from './CheckoutCart';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [productArr, setProductArr]= useState([])
-  const [cartArr, setCartArr] = useState([])
+  
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [first_name, setFirstName] = useState('');
@@ -43,15 +43,21 @@ function App() {
   
   const [orderItemsArr, setOrderItemsArr]= useState([])
   const history = useHistory();
+
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartArr') ||'[]') 
+  const [cartArr, setCartArr] = useState(cartFromLocalStorage)
+
+  useEffect(() => {
+    localStorage.setItem('cartArr',JSON.stringify(cartArr));
+      },[cartArr])
   
 
-  
-  useEffect(() => {
-    fetch("/styles")
-      .then((response) => response.json())
-      .then((productArr) => setProductArr(productArr))
-      },[])
-  
+      useEffect(() => {
+        fetch("/styles")
+          .then((response) => response.json())
+          .then((productArr) => setProductArr(productArr))
+          },[])
+      
 
       const homeBar = () => {
         history.push("/");
