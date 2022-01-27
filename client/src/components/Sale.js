@@ -1,6 +1,9 @@
 
 import { useHistory } from 'react-router-dom'
-import { useState} from 'react'
+import { useState,useEffect } from 'react'
+
+//I need to add to a product array
+// function Sale({ productArr,setProductArr, user_id, order_id}) {
 
 function Sale({setAvailable, available, currentUser, setProductArr, productArr,setIsLoggedIn }) {
 
@@ -48,51 +51,53 @@ function Sale({setAvailable, available, currentUser, setProductArr, productArr,s
     <form   onSubmit={handleAddProduct}>
       <div className="mb-3" >
     <label className="form-label" for="formBasicCategory">Category  &nbsp;  &nbsp;</label>
-        <input 
-        type="text"
-        value={category} 
-        onChange={(e) => setCategory(e.target.value)}   
-        name = "category"
-        placeholder="Category" 
-        className="form-label"></input>
-        </div>
-      <br/>
-      <br/>
-      
-      <label className="form-label" for="formBasicSize">Size  &nbsp;  &nbsp;</label>    
-        <input 
-        type="text"
-        name = "size" 
-        value={size}
-        placeholder="Size"  
-        onChange={(e) => setSize(e.target.value)} 
-        className="form-label"></input>
-      <br/>
-      <br/>
-
-      <label className="form-label"   for="formBasicPrice">Price &nbsp;  &nbsp;</label>
       <input 
-        type="price"
-        name = "price" 
-        value={price}  
-        placeholder="price" 
-        onChange={(e) => setPrice(e.target.value)} 
-        className="form-label"></input>
-      <br/>
-      <br/>
+      type="text"
+      value={category} 
+      onChange={(e) => setCategory(e.target.value)}   
+      name = "category"
+      placeholder="Category" 
+      className="form-label"></input>
+      </div>
+    <br/>
+    <br/>
     
-      <label className="form-label" for="formBasicPhoto">Photo &nbsp;  &nbsp;</label>
-      <input className= {["mb-3", "form-label"]}
-        type="photo"
-        name = "photo"
-        value={photo}  
-        placeholder="Photo"  
-        onChange={(e) => setPhoto(e.target.value)}></input>
-      <br/>
-      <br/>
+    <label className="form-label" for="formBasicSize">Size  &nbsp;  &nbsp;</label>    
+      <input 
+      type="text"
+      name = "size" 
+      value={size}
+      placeholder="Size"  
+      onChange={(e) => setSize(e.target.value)} 
+      className="form-label"></input>
+    <br/>
+    <br/>
+
+    <label className="form-label"   for="formBasicPrice">Price &nbsp;  &nbsp;</label>
+    <input 
+      type="price"
+       name = "price" 
+      value={price}  
+      placeholder="price" 
+      onChange={(e) => setPrice(e.target.value)} 
+      className="form-label"></input>
+    <br/>
+    <br/>
+  
+    <label className="form-label" for="formBasicPhoto">Photo &nbsp;  &nbsp;</label>
+    <input className="mb-3"
+      type="photo"
+      name = "photo"
+      value={photo}  
+      placeholder="Photo"  
+      onChange={(e) => setPhoto(e.target.value)} 
+      className="form-label"></input>
+    <br/>
+    <br/>
     
       <button type="submit" className="btn btn-primary">Submit</button>
     </form>
+
   )
 }
 
