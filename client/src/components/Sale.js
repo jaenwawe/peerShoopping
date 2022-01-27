@@ -1,9 +1,6 @@
 
 import { useHistory } from 'react-router-dom'
-import { useState,useEffect } from 'react'
-
-//I need to add to a product array
-// function Sale({ productArr,setProductArr, user_id, order_id}) {
+import { useState} from 'react'
 
 function Sale({setAvailable, available, currentUser, setProductArr, productArr,setIsLoggedIn }) {
 
@@ -85,13 +82,13 @@ function Sale({setAvailable, available, currentUser, setProductArr, productArr,s
     <br/>
   
     <label className="form-label" for="formBasicPhoto">Photo &nbsp;  &nbsp;</label>
-    <input className="mb-3"
+    
+    <input className={["mb-3","form-label"]}
       type="photo"
       name = "photo"
       value={photo}  
       placeholder="Photo"  
-      onChange={(e) => setPhoto(e.target.value)} 
-      className="form-label"></input>
+      onChange={(e) => setPhoto(e.target.value)}></input>
     <br/>
     <br/>
     
@@ -100,6 +97,5 @@ function Sale({setAvailable, available, currentUser, setProductArr, productArr,s
 
   )
 }
-
 
 export default Sale;
