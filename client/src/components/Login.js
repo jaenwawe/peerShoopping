@@ -1,35 +1,32 @@
-
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
 
 function Login({handleLogin, setEmail, email, setPassword, password,loginRegisterInfo ,currentUser,homeBar }) {
 
   return (
-    <div className="form">   
-    <h5> Already a member? Enter your email address and password to login</h5>
-    <form  onSubmit={handleLogin}>
-        <div className="mb-3" >
-            <label className="form-label">Email address 
-                <input 
-                type="email" 
-                name="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}></input>
-            </label>
-        </div>
-
-        <div className="mb-3">
-            <label  className="form-label">Password
-                <input 
-                type="password" 
-                name="password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}></input>
-            </label>
-        </div>
+    <Form onSubmit={handleLogin}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}/>
     
-        <button type="submit" className="btn btn-primary">Submit</button>
-    </form>
-</div>
-  )
+    </Form.Group>
+
+    <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+    </Form.Group>
+    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+
+    </Form.Group>
+    <Button variant="primary" type="submit">
+        Submit
+    </Button>
+    </Form>
+    )
 }
 
 export default Login;
+
+
+
+
