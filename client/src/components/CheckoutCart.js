@@ -1,76 +1,68 @@
 import CartCard from "./CartCard"
 
-function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar,handleLogOut}) {
-  
+function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar,handleLogOut}) 
+{  
     const customer_id = currentUser.id
     const available=false;
-    let display
-    
+
     setTotal(cartArr.reduce((a, {price}) => a + price, 0))
     
-
     function notAvailable(product_id)
     { 
-
-            fetch(`/products/${product_id}`, {
-                    method: 'PATCH',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ available })
-                })
-                .then(res => {
-                if (res.ok) {
-                    res.json()
-                    .then(product => console.log(product))
-                    
-                } else {
-                    res.json().then(errors => 
-                    console.error(errors)
-                    )}
+        fetch(`/products/${product_id}`, {
+                method: 'PATCH',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ available })
             })
+            .then(res => {
+            if (res.ok) {
+                res.json()
+                .then(product => console.log(product))                
+            } else {
+                res.json().then(errors => 
+                console.error(errors)
+            )}
+        })
     }   
 
 
     function persistOrderItem(order,product){   
-       let product_id = product.id
-       let order_id = order.id
+    let product_id = product.id
+    let order_id = order.id
         fetch(`/orders/${order.id}`, {
-          method: 'POST',
-          headers: {
+            method: 'POST',
+            headers: {
             'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              order_id,
-              customer_id,
-              product_id
-          })
+            },
+            body: JSON.stringify({
+                order_id,
+                customer_id,
+                product_id
+            })
         })
-          .then(res => {
-         
+            .then(res => {
             if (res.ok) {
-              res.json ()
-              .then(order_item => {console.log(order_item)
-              })
+                res.json ()
+                .then(order_item => {console.log(order_item)
+                })
             } else {
-              res.json().then(errors => 
-              console.error(errors)
-              )}
+                res.json().then(errors => 
+                console.error(errors)
+                )}
         })
-      }
-
+    }
 
     function orderItemsUnavailable(){        
-        cartArr.map(product => {
-        let product_id = product.id   
+        cartArr.forEach(product => {
+            let product_id = product.id   
             persistOrderItem(product, order)
-            notAvailable(product_id)
-         
-    })}
-
+            notAvailable(product_id)         
+        })
+    }
 
     function orderTotalCustomer(total,pay_method,order) {
-        
         fetch(`/orders/${order}`, {
             method: 'PATCH',
             headers: {
@@ -81,19 +73,17 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pa
             total
             })
         })
-           .then(res => {
-            if (res.ok) {
-                res.json().then(order => console.log(order))
-            } else {
-                res.json().then(errors => 
-                console.error(errors)
+        .then(res => {
+        if (res.ok) {
+            res.json().then(order => console.log(order))
+        } else {
+            res.json().then(errors => 
+            console.error(errors)
             )}
-    })
+        })
     }
 
-    
     function persistOrder() {
-        //orderTotalCustomer(total,pay_method,order) 
         orderItemsUnavailable()
         orderTotalCustomer(total,pay_method,order)
         emptyCart()
@@ -101,15 +91,13 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pa
         homeBar()
     }
 
-        return (
-            <div className="ifExist">
-        
+    return (
+        <div className="ifExist">
         { (cartArr.length < 1) 
               ?<>There are no items in your</>
               :<div className="container" className="form">
-        
-                <form  onSubmit={persistOrder}>      <div className="mb-3" >
-         
+                <form  onSubmit={persistOrder}>      
+                    <div className="mb-3" >
                         <label className="form-label">Pay Method &nbsp;  
                             <input 
                             type="payMethod" 
@@ -118,7 +106,6 @@ function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pa
                              onChange={(e) => setPayMethod(e.target.value)}
                             ></input>
                         </label>
-               
                     </div>
                     <div className="mb-3">
                         <label  className="form-label"> Total for this order is $ {total} &nbsp;  

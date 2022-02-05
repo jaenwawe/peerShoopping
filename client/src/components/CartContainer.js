@@ -1,20 +1,14 @@
-import { useState , useEffect} from "react";
- import { useHistory } from 'react-router-dom'
 
  import CartCard from "./CartCard";
- import CheckoutCart from "./CheckoutCart"
-
- import Button from 'react-bootstrap/Button'
  import OrderItem from "./OrderItem"
-
 
 function CartContainer({cartArr, setOrderItemsArr, orderItemsArr, cartClick, order,total,setTotal})
 {    
 let items = cartArr.map(product => 
         <>        
         <CartCard
-        product={product}
-        cartClick={cartClick}
+            product={product}
+            cartClick={cartClick}
         />
 
         { (order) 
@@ -25,13 +19,11 @@ let items = cartArr.map(product =>
     return (
         <div className="ifExist">
 
-        { (cartArr.length < 1) 
-              ?<>There are no items in your</>
-              :<div className="entire">
-        {items}
-        </div>}
+        { (cartArr.length < 1) ? <>There are no items in your</> : <div className="entire">
+        {items} 
+        </div>} 
         </div>
-             
-            )}
+    )
+}
 
 export default CartContainer;

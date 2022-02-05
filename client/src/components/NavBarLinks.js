@@ -1,13 +1,7 @@
 import React from "react";
 import { Link} from "react-router-dom";
-
-
-import { createBrowserHistory } from 'history';
-
 import Button from 'react-bootstrap/Button'
-
 import logo from '../data/logo.png';
-
 
 
 const linkStyles = {
@@ -24,19 +18,19 @@ const linkStyles = {
 function NavBarLinks (isLoggedIn, setIsLoggedIn)
 {
   return (
-    <div>
+  <div>
     <Button variant="info"> <img src={logo} className="App-logo" alt="logo" /></Button>{' '}
-                
+                  
     <Link
-          to="/"
-          style={linkStyles}
-          activeStyle={{
-            background: "darkblue",
-          }}>
-          Home
-      </Link>
+      to="/"
+      style={linkStyles}
+      activeStyle={{
+        background: "darkblue",
+      }}>
+      Home
+    </Link>
 
-      
+        
     <Link
         to="/about"
         style={linkStyles}
@@ -44,32 +38,28 @@ function NavBarLinks (isLoggedIn, setIsLoggedIn)
           background: "darkblue",
         }}>
           About
-      </Link>
+    </Link>
       
-      <Link to="/login" style={linkStyles} activeStyle={{ background: "darkblue"}}> Login </Link>
+    <Link to="/login" style={linkStyles} activeStyle={{ background: "darkblue"}}> Login </Link>
 
-      <Link
-        to="/cart"
-        style={linkStyles}
-        activeStyle={{
-          background: "darkblue",
-        }}>
-        Cart     
-      </Link>
+    <Link
+      to="/cart"
+      style={linkStyles}
+      activeStyle={{
+        background: "darkblue",
+      }}>
+      Cart     
+    </Link>
 
-<Link
-        to="/register"
-        style={linkStyles}
-        activeStyle={{
-          background: "darkblue",
-        }}>
-        Sign Up
-      </Link>
-      
-  
-
-   
-    </div>
+    <Link
+      to="/register"
+      style={linkStyles}
+      activeStyle={{
+        background: "darkblue",
+      }}>
+      Sign Up
+    </Link>
+  </div>
   );
 }
 

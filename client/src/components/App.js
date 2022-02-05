@@ -91,30 +91,28 @@ function App() {
             }
           })
       }
-
-
       
       function handleLogOut() {
-          setIsLoggedIn(false)
-          setCartArr([])
-          setEmail('')
-          setPassword('')
-          setFirstName('')
-          setLastName("")
-          setUsername("")
-          setNumber("")
-          setAddress("")
-          setState("")
-          setCity("")
-          setZip("")
-          setAdmin(false)
-          setOrder(null)
-          setTotal(0)
-          setPayMethod('Visa')
-          setOrderItemsArr([])
-          setCurrentUser(null)
-          localStorage.clear();
-          homeBar()
+        setIsLoggedIn(false)
+        setCartArr([])
+        setEmail('')
+        setPassword('')
+        setFirstName('')
+        setLastName("")
+        setUsername("")
+        setNumber("")
+        setAddress("")
+        setState("")
+        setCity("")
+        setZip("")
+        setAdmin(false)
+        setOrder(null)
+        setTotal(0)
+        setPayMethod('')
+        setOrderItemsArr([])
+        setCurrentUser(null)
+        localStorage.clear();
+        homeBar()
       }
 
         const handleRegister = (event) => 
@@ -157,244 +155,202 @@ function App() {
                
             }
 
-               function loginRegisterInfo(user)
-               {
-                 let total=0;
-                 let pay_method="Wallet"
+      function loginRegisterInfo(user)
+      {
+        let total=0;
+        let pay_method="Wallet"
 
-                   setCurrentUser(user) 
-                   console.log(user)
-                   setIsLoggedIn(true)          
-                   let user_id = user.id
-                   
-                   fetch('/shopping', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                      total,
-                      pay_method,
-                      user_id 
-                    })
-                  })
-                    .then(res => {
-                      if (res.ok) {
-                        res.json().then(order => {
-                          console.log(order)
-                          setOrder(order.id)
-                        })
-                      } else {
-                        res.json().then(errors => 
-                        console.error(errors)
-                        )
-                      }
-                  })
-                }
-
-                  
-        
-
-                  function  unAvailableProduct(product)  {
-                    let  available=false;
-                  removeProduct(product)  
-                }
-
-    function persistOrderItem(order, product){
-          let order_id=order.id
-          let customer_id=currentUser.id
-          let product_id=product
-      fetch('/sold', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            order_id,
-            customer_id,
-            product_id
+          setCurrentUser(user) 
+          console.log(user)
+          setIsLoggedIn(true)          
+          let user_id = user.id
+          
+          fetch('/shopping', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            total,
+            pay_method,
+            user_id 
+          })
         })
-      })
-        .then(res => {
-       
-          if (res.ok) {
-            res.json ()
-            .then(order_item => {console.log(order_item)
-            })
-          } else {
-            res.json().then(errors => 
-            console.error(errors)
-            )}
-      })
+          .then(res => {
+            if (res.ok) {
+              res.json().then(order => {
+                console.log(order)
+                setOrder(order.id)
+              })
+            } else {
+              res.json().then(errors => 
+              console.error(errors)
+              )
+            }
+        })
+      }
+
+    function  unAvailableProduct(product)  {
+      removeProduct(product)  
     }
 
-         function removeProduct(product) {      
-          setProductArr(productArr.filter(item => item !== product))
-        }
+    function removeProduct(product) {      
+      setProductArr(productArr.filter(item => item !== product))
+    }
 
-        function removeFromCart(product){
-          setCartArr (cartArr.filter(item => item !== product))
-        }     
-        function emptyCart(product){
-          setCartArr ([])
-        }     
-  
-        function addToCart(product){
-          setCartArr([product,...cartArr])
-        }
-        function addToProducts(product) {
-          setProductArr([product,...productArr])
-        }
-        
-        function cartClick(product){
-          console.log(product)
-          addToProducts(product)
-          removeFromCart(product)          
-        }
-        
-        function nonCartProductClick(product){
-          console.log(product)
-          addToCart(product)
-          removeProduct(product) 
-         }
+    function removeFromCart(product){
+      setCartArr (cartArr.filter(item => item !== product))
+    }     
+    function emptyCart(product){
+      setCartArr ([])
+    }     
 
-        const display = 
-        <ProductContainer 
-          productArr={productArr}
-          nonCartProductClick={nonCartProductClick}
-          currentUser={currentUser}
-          removeProduct={removeProduct}
-          unAvailableProduct={unAvailableProduct}
-          />
-  
-         let unregisteredRoutes =
-         <>
-         <Route path="/login">
-              <Login  
+    function addToCart(product){
+      setCartArr([product,...cartArr])
+    }
+    function addToProducts(product) {
+      setProductArr([product,...productArr])
+    }
+    
+    function cartClick(product){
+      console.log(product)
+      addToProducts(product)
+      removeFromCart(product)          
+    }
+    
+    function nonCartProductClick(product){
+      console.log(product)
+      addToCart(product)
+      removeProduct(product) 
+      }
+
+    const display = 
+      <ProductContainer 
+        productArr={productArr}
+        nonCartProductClick={nonCartProductClick}
+        currentUser={currentUser}
+        removeProduct={removeProduct}
+        unAvailableProduct={unAvailableProduct}
+        />
+
+        let unregisteredRoutes =
+        <>
+        <Route path="/login">
+            <Login  
               cartArr={cartArr}
               handleLogin={handleLogin} 
               setIsLoggedIn={setIsLoggedIn}
               setEmail={setEmail}
               setPassword={setPassword} 
-              loginRegisterInfo={loginRegisterInfo}/> 
-              
+              loginRegisterInfo={loginRegisterInfo}/>   
         </Route> 
 
          <Route path="/register">
-                       <Register 
-                       handleRegister={handleRegister}
-                       first_name={first_name}
-                       setFirstName={setFirstName}
-                       last_name={last_name}
-                       setLastName={setLastName}
-                       username={username}
-                       setUsername={setUsername}
-                       phone_number={phone_number}
-                       setNumber={setNumber}
-                       address={address}
-                       setAddress={setAddress}
-                       city={city}
-                       setCity={setCity}
-                       state={state}
-                       setState={setState}
-                       zipcode={zipcode}
-                       setZip={setZip}
-                       email={email}
-                       setEmail={setEmail}
-                       setPassword={setPassword}
-                       password={password} 
-                       /> 
-                     </Route> 
-                     {display}    
-                      </>
+            <Register 
+              handleRegister={handleRegister}
+              first_name={first_name}
+              setFirstName={setFirstName}
+              last_name={last_name}
+              setLastName={setLastName}
+              username={username}
+              setUsername={setUsername}
+              phone_number={phone_number}
+              setNumber={setNumber}
+              address={address}
+              setAddress={setAddress}
+              city={city}
+              setCity={setCity}
+              state={state}
+              setState={setState}
+              zipcode={zipcode}
+              setZip={setZip}
+              email={email}
+              setEmail={setEmail}
+              setPassword={setPassword}
+              password={password} 
+            /> 
+          </Route> 
+          {display}    
+        </>
 
      let registeredRoutes =
-                 <>
-                 <Route path="/me">
-                         <Me  currentUser={currentUser}/> 
-                      </Route>
+            <>
+            <Route path="/me">
+              <Me  currentUser={currentUser}/> 
+            </Route>
 
-                    <Route path="/sale">
-                         <Sale  
-                         currentUser={currentUser} 
-                         setProductArr={setProductArr}
-                         setIsLoggedIn={setIsLoggedIn}
-                         productArr={productArr}
-                         /> 
-                      </Route>
-                    
-                      <Route path="/checkout">
-                         <CheckoutCart
-                         cartArr={cartArr}
-                         order={order}
+              <Route path="/sale">
+                <Sale  
+                  currentUser={currentUser} 
+                  setProductArr={setProductArr}
+                  setIsLoggedIn={setIsLoggedIn}
+                  productArr={productArr}
+                /> 
+                </Route>
+              
+              <Route path="/checkout">
+                <CheckoutCart
+                  cartArr={cartArr}
+                  order={order}
 
-                        currentUser={currentUser} 
+                  currentUser={currentUser} 
 
-                        total={total}
-                        setTotal={setTotal}
-                        pay_method={pay_method}
-                        setPayMethod={setPayMethod}
-                        cartClick={cartClick}
-                        emptyCart={emptyCart}
-                        homeBar={homeBar}
-                        handleLogOut={handleLogOut}
+                  total={total}
+                  setTotal={setTotal}
+                  pay_method={pay_method}
+                  setPayMethod={setPayMethod}
+                  cartClick={cartClick}
+                  emptyCart={emptyCart}
+                  homeBar={homeBar}
+                  handleLogOut={handleLogOut}
+                /> 
+              </Route>
 
-                         /> 
-                      </Route>
-
-                      <Route path="/logout">
-                         <Logout  
-                         setCurrentUser={setCurrentUser}
-                         setCartArr={setCartArr}
-                         setIsLoggedIn={setIsLoggedIn}
-                         homeBar={homeBar}
-                         handleLogOut={handleLogOut}
-                         /> 
-                      </Route> 
-                  </>
-      
+              <Route path="/logout">
+                  <Logout  
+                    setCurrentUser={setCurrentUser}
+                    setCartArr={setCartArr}
+                    setIsLoggedIn={setIsLoggedIn}
+                    homeBar={homeBar}
+                    handleLogOut={handleLogOut}
+                  /> 
+              </Route> 
+            </>
   return(
     <div> 
-          <NavBarContainer 
-            isLoggedIn={isLoggedIn} 
-            setIsLoggedIn={setIsLoggedIn}
-            
-            handleLogin={handleLogin}
-            currentUser={currentUser} 
-            setCurrentUser={setCurrentUser} 
-            
-            setEmail={setEmail} 
-            email={email} 
-            
-            setPassword={setPassword} 
-            password={password}
+      <NavBarContainer 
+        isLoggedIn={isLoggedIn} 
+        setIsLoggedIn={setIsLoggedIn}
+        
+        handleLogin={handleLogin}
+        currentUser={currentUser} 
+        setCurrentUser={setCurrentUser} 
+        
+        setEmail={setEmail} 
+        email={email} 
+        
+        setPassword={setPassword} 
+        password={password}
+      />
+
+      <Switch>
+        <Route exact path="/"> {display}</Route> 
+        <Route path="/home"> <Home /> {display} </Route>
+        <Route path="/about"> <About /> {display} </Route>
+        
+        <Route path="/cart">
+          <CartContainer
+            order={order}
+            cartArr={cartArr}
+            orderItemsArr={orderItemsArr}
+            setOrderItemsArr={setOrderItemsArr}
+            cartClick={cartClick}
             />
-
- 
-                   <Switch>
-                     <Route exact path="/"> {display}</Route> 
-                      <Route path="/home"> <Home /> {display} </Route>
-                      <Route path="/about"> <About /> {display} </Route>
-                     
-                      <Route path="/cart">
-                        <CartContainer
-                          order={order}
-                          cartArr={cartArr}
-                          orderItemsArr={orderItemsArr}
-                          setOrderItemsArr={setOrderItemsArr}
-                          cartClick={cartClick}
-                          />
-                      
-                      </Route>   
-
-                      CartContainer
-            
-            {isLoggedIn ? registeredRoutes : unregisteredRoutes} 
-            
-                  </Switch>
-
-       
-
-  </div>)
+        
+        </Route>   
+        CartContainer
+        {isLoggedIn ? registeredRoutes : unregisteredRoutes} 
+      </Switch>
+    </div>)
 }
 export default App;
