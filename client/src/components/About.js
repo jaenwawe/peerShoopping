@@ -4,11 +4,17 @@ import {made_image} from "../data/Mock"
 
 function About() {
     return (
-<div> 
-  
-              <h2>First class clothes  Resold at great prices</h2>
-              <img src={made_image} alt="girl looking up" />
-              <p>Shop online!  There is no need to leave your house to find vintage clothing, or even a toaster</p>
+
+  <div>
+     <h1 className="text-center">First class clothes!  
+                    Resold at great prices!</h1>
+      <img class="center" src={made_image} alt="girl looking up" />
+<br/>
+      <div class="container">
+        <div class="square">
+           <div class="content">
+            
+              <p>Shop online!  There is no need to leave your house to find vintage clothing or shoes!</p>
               <p>The sellers can relate to seller online and not having to get to a vintage store since most do not have contactless delivery. If you see any, tell everyone</p>
 
               <p>View the products that are listed on each page other than the signup and sale page. </p>
@@ -18,8 +24,11 @@ function About() {
               <p>The items that you have added are in the Checkout button on the navigation bar at the top of the page</p>
               <p>To Checkout select the method of payment and click submit.  You will see the total cost of the cart and the items below</p>
 
-
-  </div>    
+              </div>
+          </div>
+        </div>    
+      </div>
+    
     );
   }
 
