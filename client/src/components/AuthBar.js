@@ -1,26 +1,20 @@
 import React from "react";
 import { NavLink} from "react-router-dom";
 
-
 import Button from 'react-bootstrap/Button'
 import logo from '../data/logo.png';
 
 const linkStyles = {
     display: "inline-block",
-  width: "120px",
-  padding: "12px",
-  margin: "0 6px 6px",
-  background: "blue",
-  textDecoration: "none",
-  color: "white",
+    width: "120px",
+    padding: "12px",
+    margin: "0 6px 6px",
+    background: "blue",
+    textDecoration: "none",
+    color: "white",
 };
 
-
-
 function AuthBar(setCurrentUser, currentUser,handleLogOut) {
-
-
-   
    
   return (
     <div>
@@ -28,11 +22,8 @@ function AuthBar(setCurrentUser, currentUser,handleLogOut) {
                   
         <NavLink
           to="/me"
-          /* set exact so it knows to only set activeStyle when route is deeply equal to link */
           exact
-          /* add styling to Navlink */
           style={linkStyles}
-          /* add prop for activeStyle */
           activeStyle={{
             background: "darkblue",
           }}>
@@ -58,7 +49,6 @@ function AuthBar(setCurrentUser, currentUser,handleLogOut) {
             Sale2
           </NavLink>
 
-
           <NavLink
             to="/logout"
             style={linkStyles}
@@ -70,8 +60,6 @@ function AuthBar(setCurrentUser, currentUser,handleLogOut) {
           </NavLink>
 
       </div>
-     
-
 
   );
 }

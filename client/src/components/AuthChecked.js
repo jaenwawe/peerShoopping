@@ -1,7 +1,4 @@
-
-
 import { useState,useEffect } from 'react'
-
 
 
 
@@ -14,8 +11,4 @@ function AuthChecked(title = "AuthChecked", setTitle) {
     );
   }
 
-
-
-  //index.js or index.html on in public folder  index.css
-  
   export default AuthChecked;

@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button'
 import logo from '../data/logo.png';
 
 
-
 const linkStyles = {
     display: "inline-block",
   width: "120px",
