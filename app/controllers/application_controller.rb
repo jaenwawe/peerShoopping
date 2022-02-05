@@ -2,8 +2,6 @@ class ApplicationController < ActionController::API
     include ActionController::Cookies
    
  
-  
-    
     private
   
     def current_user
@@ -14,7 +12,5 @@ class ApplicationController < ActionController::API
       render json: { error: "You must be logged in to do that." }, 
       status: :unauthorized unless current_user
     end
-
-
-  
+ 
   end

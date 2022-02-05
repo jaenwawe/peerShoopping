@@ -14,8 +14,6 @@ Product.destroy_all
 User.destroy_all
 
 
-
-
 puts "Seed data"
 users=[]
 orders_items=[]
@@ -23,10 +21,9 @@ orders=[]
 products=[]
 payments_accepted=["Visa", "PayPal", "Venmo"]
 
-r=rand(1..50) #randome price in Procducts
+r=rand(1..50)
 random_boolean = [true, false].sample
 
-# same = rand(0..3) #random hash in type array
 type = [
     { "suit" => "https://tinyurl.com/6k2fmt3x"},
    {"shirt"=> "https://bit.ly/3F7twvT"},
@@ -35,8 +32,22 @@ type = [
 ]
 
 
-# generate 10 users
 puts "Seeding users"
+
+    one= User.create!(
+        first_name: "Jae",
+        last_name:  "Nwawe",
+        email:  "nwawe.jae@gmail.com",
+        password: "abc123",
+        username:  "jaenwawe",
+        phone_number:  "213-820-0305",
+        address: "123 Address",
+        city:  "Chicago",
+        state:  "JI",
+        zipcode:  "60667",
+        admin: true
+    )
+    users<<one
 
 5.times do 
     u= User.create!(
@@ -58,7 +69,7 @@ end
 
     puts "Seeding products"
     40.times do 
-        same = rand(0..3) #random hash in type array
+        same = rand(0..3) 
     p= Product.create!(
         user_id: users.sample.id,
         category: type[same].keys.join,
@@ -81,9 +92,6 @@ puts "Seeding Orders"
    
     )
     orders<<o
-
- 
-
 
 end
 

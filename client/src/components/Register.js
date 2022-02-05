@@ -1,8 +1,4 @@
 
-import { useHistory } from 'react-router-dom'
-import { useState } from 'react'
-
-
 function Register({
   handleRegister, first_name,setFirstName,last_name,setLastName, username,setUsername,phone_number,setNumber, address,setAddress,city, setCity, state,setState, zipcode,setZip,email, setEmail, setPassword,password }) 
   {
@@ -42,7 +38,7 @@ function Register({
       value={email}  
       placeholder="ms@gmail.com" 
       onChange={(e) => setEmail(e.target.value)} 
-      // className="form-label"
+     
       ></input>
     <br/>
   

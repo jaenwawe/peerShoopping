@@ -30,7 +30,7 @@ Start the application by cloning it to a folder
 Type "bundle install" in the PeerShopping folder
 
 cd into PeerShoppping
-Type rails servers
+Type rails server
 
 cd into PeerShoppping/client
 Type "npm start"

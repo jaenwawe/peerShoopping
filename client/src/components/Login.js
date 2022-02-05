@@ -1,7 +1,6 @@
 
 
 function Login({handleLogin, setEmail, email, setPassword, password,loginRegisterInfo ,currentUser,homeBar }) {
-// function Login({cartArray, currentUser, setCurrentUser, handleLogin, setEmail, email, setPassword, password}) {
 
   return (
     <div className="form">   

@@ -9,7 +9,6 @@ import { useState , useEffect} from "react";
 
 
 function CartContainer({cartArr, setOrderItemsArr, orderItemsArr, cartClick, order,total,setTotal})
-//write function that remooves from cartArray adds to orderItem array after sql posted
 {    
 let items = cartArr.map(product => 
         <>        

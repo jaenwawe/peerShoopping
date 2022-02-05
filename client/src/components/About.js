@@ -24,7 +24,5 @@ function About() {
   }
 
 
-
-  //index.js or index.html on in public folder  index.css
   
   export default About;

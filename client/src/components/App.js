@@ -1,4 +1,3 @@
-//import { BrowserRouter, Route, Switch,useHistory } from "react-router-dom";
 import { Route, Switch,useHistory } from "react-router-dom";
 
 import React, {useState, useEffect} from 'react'
@@ -15,15 +14,13 @@ import Register from './Register';
 
 import Logout from './Logout';
 import Sale from './Sale';
-//import Order from '../Order';
 
 import ProductContainer from "./ProductContainer";
 import CartContainer from './CartContainer';
 import CheckoutCart from './CheckoutCart';
 
 function App() {
-const [productArr, setProductArr]= useState([])
-  
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [first_name, setFirstName] = useState('');
@@ -34,42 +31,42 @@ const [productArr, setProductArr]= useState([])
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zipcode, setZip] = useState("");
+  
   const [admin, setAdmin] = useState(false);
 
   const [order, setOrder]= useState(null)
   const [total, setTotal] = useState(0)
   const [pay_method, setPayMethod] = useState('Visa')
   
+  const [productArr, setProductArr]= useState([])
   const [orderItemsArr, setOrderItemsArr]= useState([])
   const history = useHistory();
 
   const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartArr') ||'[]') 
   
   const [cartArr, setCartArr] = useState(cartFromLocalStorage)
-  useEffect(() => {
-    localStorage.setItem('cartArr',JSON.stringify(cartArr));
-      },[cartArr])
+    useEffect(() => {
+      localStorage.setItem('cartArr',JSON.stringify(cartArr));
+        },[cartArr])
   
-      const currentUserStateLocalStorage = JSON.parse(localStorage.getItem('currentUser'))
-      const [currentUser, setCurrentUser] = useState(currentUserStateLocalStorage)
-  
+  const currentUserStateLocalStorage = JSON.parse(localStorage.getItem('currentUser'))
+  const [currentUser, setCurrentUser] = useState(currentUserStateLocalStorage)
+
     useEffect(() => {
       localStorage.setItem('currentUser', JSON.stringify(currentUser))
     }, [currentUser])
 
-    const [isLoggedIn, setIsLoggedIn] = useState(!! currentUser)
+  const [isLoggedIn, setIsLoggedIn] = useState(!! currentUser)
 
-
-      useEffect(() => {
-        fetch("/styles")
-          .then((response) => response.json())
-          .then((productArr) => setProductArr(productArr))
-          },[])
+    useEffect(() => {
+      fetch("/styles")
+        .then((response) => response.json())
+        .then((productArr) => setProductArr(productArr))
+        },[])
       
-
-      const homeBar = () => {
-        history.push("/");
-      };
+    const homeBar = () => {
+      history.push("/");
+    };
    
       const handleLogin = (event) => {
         event.preventDefault()
@@ -100,7 +97,6 @@ const [productArr, setProductArr]= useState([])
       function handleLogOut() {
           setIsLoggedIn(false)
           setCartArr([])
-          //setProductArr([])
           setEmail('')
           setPassword('')
           setFirstName('')
@@ -119,9 +115,6 @@ const [productArr, setProductArr]= useState([])
           setCurrentUser(null)
           localStorage.clear();
           homeBar()
-
-   
-
       }
 
         const handleRegister = (event) => 
@@ -152,6 +145,7 @@ const [productArr, setProductArr]= useState([])
                   {
                   setCurrentUser(user)
                   loginRegisterInfo(user)
+                  homeBar()
                   }
                   
                 )} else {
@@ -203,48 +197,8 @@ const [productArr, setProductArr]= useState([])
 
                   function  unAvailableProduct(product)  {
                     let  available=false;
-                    const notAvailableProduct =(e)=>{
-                        fetch(`/products/${product.id}`, {
-                            method: 'PATCH',
-                            headers: {
-                            'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ available })
-                        })
-                        .then(res => {
-                        if (res.ok) {
-                            res.json()            
-                        } else {
-                            res.json().then(errors => 
-                            console.error(errors)
-                            )}
-                    })
-                  }
                   removeProduct(product)  
                 }
-
-
-
-      //   function orderTotalCustomer(order) {
-          
-      //     fetch(`/orders/${order.id}`, {
-      //         method: 'PATCH',
-      //         headers: {
-      //         'Content-Type': 'application/json'
-      //         },
-      //         body: JSON.stringify({
-      //         pay_method, 
-      //         total
-      //         })
-      //     })
-      //     .then(res => {
-      //     if (res.ok) {
-      //         res.json().then(order => console.log(order))
-      //     } else {
-      //         res.json().then(errors => 
-      //         console.error(errors)
-      //     )}
-      // })}
 
     function persistOrderItem(order, product){
           let order_id=order.id
@@ -285,7 +239,6 @@ const [productArr, setProductArr]= useState([])
           setCartArr ([])
         }     
   
-
         function addToCart(product){
           setCartArr([product,...cartArr])
         }
@@ -374,9 +327,9 @@ const [productArr, setProductArr]= useState([])
                          <CheckoutCart
                          cartArr={cartArr}
                          order={order}
-                        // setOrderItemsArr={setOrderItemsArr}
+
                         currentUser={currentUser} 
-                        // orderItemsArr={orderItemsArr}
+
                         total={total}
                         setTotal={setTotal}
                         pay_method={pay_method}
@@ -385,7 +338,7 @@ const [productArr, setProductArr]= useState([])
                         emptyCart={emptyCart}
                         homeBar={homeBar}
                         handleLogOut={handleLogOut}
-                      // orderTotalCustomer={orderTotalCustomer}
+
                          /> 
                       </Route>
 
@@ -417,8 +370,7 @@ const [productArr, setProductArr]= useState([])
             password={password}
             />
 
-
-        
+ 
                    <Switch>
                      <Route exact path="/"> {display}</Route> 
                       <Route path="/home"> <Home /> {display} </Route>
@@ -434,7 +386,6 @@ const [productArr, setProductArr]= useState([])
                           />
                       
                       </Route>   
-
 
                       CartContainer
             

@@ -1,6 +1,5 @@
 import CartCard from "./CartCard"
 
-//function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar,orderTotalCustomer}) {
 function CheckoutCart({cartClick, cartArr, order, currentUser,total, setTotal,pay_method,setPayMethod, emptyCart,homeBar,handleLogOut}) {
   
     const customer_id = currentUser.id

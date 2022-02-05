@@ -37,10 +37,7 @@ function NavBarLinksAdmin (isLoggedIn, setIsLoggedIn,currentUser)
 
     <Link
           to="/"
-          /* set exact so it knows to only set activeStyle when route is deeply equal to link */
-          /* add styling to Navlink */
           style={linkStyles}
-          /* add prop for activeStyle */
           activeStyle={{
             background: "darkblue",
           }}>
@@ -80,8 +77,7 @@ function NavBarLinksAdmin (isLoggedIn, setIsLoggedIn,currentUser)
       <Link to="/logout" style={linkStyles} activeStyle={{ background: "darkblue"}}> Logout </Link>
       <Button variant="info">  <Link
                        to="/checkout"
-                      /* set exact so it knows to only set activeStyle when route is deeply equal to link */
-                      /* add styling to Navlink */
+
                       style={linkStyles}
                       /* add prop for activeStyle */
                       activeStyle={{
@@ -89,11 +85,7 @@ function NavBarLinksAdmin (isLoggedIn, setIsLoggedIn,currentUser)
                       }}>
                       Checkout
                   </Link></Button>{' '}
-                
-      
- 
-   
-   
+          
     </div>
   );
 }
