@@ -1,12 +1,24 @@
 # README
 
+ADD boootstrap form
+
+- to sign in
+- sale
+
+remove padding/boxe
+
+- about
+  jwt endcde
+
+-redux
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
 Things you may want to cover:
 
--Bootstrap React v5.13  see cmd below from https://react-bootstrap.github.io/getting-started/introduction
- npm install react-bootstrap bootstrap@5.1.3
+-Bootstrap React v5.13 see cmd below from https://react-bootstrap.github.io/getting-started/introduction
+npm install react-bootstrap bootstrap@5.1.3
 
 - Ruby version
   Ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x86_64-darwin20]
@@ -38,4 +50,4 @@ Type rails server
 cd into PeerShoppping/client
 Type "npm start"
 
-*This app is set to run on localhost:3001, which the client will automatically open in a browser
+\*This app is set to run on localhost:3001, which the client will automatically open in a browser

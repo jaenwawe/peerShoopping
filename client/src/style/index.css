@@ -25,11 +25,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
-.square {
 
+.form-container{
+  width: 50%;
+  height: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-container-small{
+  width: 30%;
+  height: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.square {
   padding-left: 0;
   padding-right: 0;
   position: relative;
